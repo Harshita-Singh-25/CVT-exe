@@ -1,0 +1,128 @@
+### **Experiment 2: 6 Docker Commands**
+
+1. **Build a Docker Image**:  
+   Command: `docker build -t [image_name] .`  
+   Builds a Docker image from a Dockerfile in the current directory.
+
+2. **Run a Docker Container**:  
+   Command: `docker run -d -p 8080:80 --name [container_name] [image_name]`  
+   Runs a container in detached mode, mapping port 8080 on your host to port 80 in the container.
+
+3. **List All Containers**:  
+   Command: `docker ps -a`  
+   Lists all containers, both running and stopped, on your system.
+
+4. **Stop a Running Container**:  
+   Command: `docker stop [container_name]`  
+   Stops a running container by its name.
+
+5. **Remove a Stopped Container**:  
+   Command: `docker rm [container_name]`  
+   Removes a stopped container from your system.
+
+6. **Remove a Docker Image**:  
+   Command: `docker rmi [image_name]`  
+   Deletes a Docker image from your local machine.
+
+---
+
+### **Experiment 3: Create a Docker Image from HTML File**
+
+1. Create an empty folder and open it in VS Code.
+2. Create an `index.html` file with your content.
+3. Create a `Dockerfile` with the following content:
+   ```Dockerfile
+   FROM nginx:alpine
+   RUN rm -rf /usr/share/nginx/html/*
+   COPY index.html /usr/share/nginx/html/
+   EXPOSE 80
+   ```
+4. Open the integrated terminal in VS Code.
+5. Run `docker -v` to check if Docker is running.
+6. Build the image with the command:  
+   `docker build -t [image_name] .`
+7. Verify the image with:  
+   `docker images`
+8. Run a container from the image:  
+   `docker run -d -p 8080:80 --name [container_name] [image_name]`
+9. Verify if the container is running with:  
+   `docker ps -a` or by accessing `localhost:8080`.
+10. To stop the container:  
+    `docker stop [container_name]`
+11. To remove the container:  
+    `docker rm [container_name]`
+
+---
+
+### **Experiment 4: Pull Image from Docker Hub**
+
+1. Open your terminal in the working directory.
+2. Pull the nginx image:  
+   `docker pull nginx`
+3. Verify the image is pulled:  
+   `docker images`
+4. Run the container from the image:  
+   `docker run -d -p 8080:80 --name [container_name] nginx`
+5. Check if the container is running by accessing `localhost:8080`.
+6. To stop the container:  
+   `docker stop [container_name]`
+
+---
+
+### **Experiment 5: Create Master and Worker Nodes in Kubernetes**
+
+1. Go to KillerCoda and open Kubernetes 1.32.
+2. The master and worker nodes will already be created.
+3. View the nodes with:  
+   `kubectl get nodes`
+4. The following are key Kubernetes commands:
+   - **Get Nodes**:  
+     `kubectl get nodes`
+   - **Get Pods**:  
+     `kubectl get pods`
+   - **Create a Pod**:  
+     `kubectl run [pod_name] --image=nginx`
+   - **Get Pod Details**:  
+     `kubectl describe pod [pod_name]`
+   - **Expose Pod as a Service**:  
+     `kubectl expose pod [pod_name] --port=80 --type=NodePort`
+   - **Get Service**:  
+     `kubectl get svc`
+
+---
+
+### **Experiment 6: Create and Troubleshoot a Pod in Kubernetes**
+
+1. Go to KillerCoda and open the Kubernetes playground.
+2. Create a pod YAML file:  
+   `nano mypod.yaml`
+3. Paste the following configuration into the file:
+   ''''yaml''''''
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: mypod
+   spec:
+     containers:
+     - name: mycontainer
+       image: nginx
+       ports:
+       - containerPort: 80
+
+
+4. Save and exit with:  
+   `Ctrl + X → Y → Enter`
+5. Deploy the pod with:  
+    kubectl apply -f mypod.yaml
+6. Verify the pod is running:  
+     kubectl get pods
+7. Get the pod's IP address:  
+      kubectl get pod mypod -o wide
+8. View the pod logs:  
+    kubectl logs mypod
+9. Describe the pod:  
+     kubectl describe pod mypod
+
+--- 
+
+These are the brief steps and commands for each experiment in Docker and Kubernetes. Let me know if you need more information!
